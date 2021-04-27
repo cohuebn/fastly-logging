@@ -1,0 +1,21 @@
+{
+  "name": "fastly-logging",
+  "description": "A proof-of-concept of how [Fastly logs](https://www.fastly.com/) can be streamed to [CloudWatch](https://aws.amazon.com/cloudwatch/).",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest test",
+    "test:watch": "jest --watch test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.893.0"
+  }
+}

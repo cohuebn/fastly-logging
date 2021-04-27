@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless application template to setup serverless resources for Fastly logging proof-of-concept
+
+Parameters:
+  Namespace:
+    Type: String
+  CloudWatchLogGroup:
+    Type: String
+  FunctionRoleArn:
+    Type: String
+Resources:
+  PullLogsFromS3:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: pull-logs-from-s3.handler
+      Runtime: nodejs12.x
+      Role: !Ref FunctionRoleArn
+      Timeout: 10
+      Environment:
+        Variables:
+          # Urls only set when running locally
+          S3_URL: !Ref "AWS::NoValue"
+          CLOUDWATCH_LOGS_URL: !Ref "AWS::NoValue"
+          CLOUDWATCH_LOG_GROUP: !Ref CloudWatchLogGroup

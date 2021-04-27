@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,logs
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "${TMPDIR:-/tmp/}localstack:/tmp/localstack"
+    networks:
+     - fastly-logging-network
+networks:
+  fastly-logging-network:
+    name: fastly-logging-network

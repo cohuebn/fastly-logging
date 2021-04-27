@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless application template to setup serverless resources for Fastly logging proof-of-concept
+
+Parameters:
+  Namespace:
+    Type: String
+  FastlyLoggingStreamArn:
+    Type: String
+Resources:
+  StreamLogsToCloudwatch:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: stream-logs-to-cloudwatch.handler
+      Runtime: nodejs12.x
+      Timeout: 10
+      Events:
+        Stream:
+          Type: Kinesis
+          Properties:
+            Stream: !Ref FastlyLoggingStreamArn
+            BatchSize: 100
+            StartingPosition: LATEST
